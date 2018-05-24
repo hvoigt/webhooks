@@ -68,6 +68,11 @@ STDIN.each_line do |line|
   start_commit_id, end_commit_id, ref = line.strip.split
 end
 
+# skip handling if this ref gets deleted
+if end_commit_id == "0000000000000000000000000000000000000000"
+	exit
+end
+
 # current directory is repository root
 repo_path = Dir.pwd
 repo_name = Pathname.new(repo_path).basename
